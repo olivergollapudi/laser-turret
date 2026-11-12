@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Printables description</title>
+<style>
+  body { font-family: -apple-system, system-ui, sans-serif; max-width: 760px; margin: 32px auto; padding: 0 16px; line-height: 1.5; color: #1a1a1a; background: #fff; }
+  blockquote { border-left: 4px solid #bbb; margin: 12px 0; padding: 4px 16px; font-style: italic; color: #444; }
+  table { border-collapse: collapse; }
+  th, td { border: 1px solid #ccc; padding: 6px 10px; text-align: left; }
+  hr { border: 0; border-top: 1px solid #ccc; margin: 20px 0; }
+</style>
+</head>
+<body>
+<h2>Auto-Tracking Laser Turret — Raspberry Pi + YOLO Vision (Pan/Tilt Remix)</h2>
+
+<p>A desk-sized pan/tilt turret that <strong>spots a person</strong> with a neural-network object detector and <strong>keeps a laser pointer locked on them</strong>. It's a remix of Steve Eckerlein's excellent <strong>Cheap FPV Gimbal</strong> — print 2 new parts and his gimbal becomes a tracking turret.</p>
+
+<hr>
+
+<h3>🎯 What is this?</h3>
+
+<p>This turret watches a scene through a <strong>Raspberry Pi Camera Module 3</strong>, runs a <strong>YOLO object-detection model</strong> to find a person in real time, and drives <strong>two SG90 servos</strong> so a laser pointer stays aimed at whoever it found.</p>
+
+<p>Detection runs on <strong>a Mac running YOLO11n</strong> — the Raspberry Pi Zero 2W streams the camera over Wi-Fi, and the Mac sends pan / tilt / laser commands back over a lightweight TCP link about <strong>15–19 times a second</strong>. A live window on the Mac shows what the turret sees, the tracked person and the aim point. Press <strong>M</strong> to switch to manual and steer it with the arrow keys.</p>
+
+<hr>
+
+<h3>✨ What's new in this remix</h3>
+
+<p>This model is built on <strong>Cheap FPV Gimbal - Pan/Tilt by Steve Eckerlein</strong>. The pan/tilt base, servo mounting, and gear mechanism are his original design and are used unchanged — full credit to him for the hard part.</p>
+
+<p>This remix adds:</p>
+<ul>
+  <li>🔴 <strong>A new payload mount</strong> sized for a 5 mm 5 mW laser diode module</li>
+  <li>📷 <strong>A redesigned top part</strong> of the gimbal that carries a Raspberry Pi Camera Module 3 plus the laser, replacing the original FPV camera mount</li>
+</ul>
+
+<blockquote><p>💡 <strong>Already printed Steve's gimbal?</strong> You only need to print the 2 new parts in this remix — the base and mechanism are identical, so you can upgrade an existing build in one short print.</p></blockquote>
+
+<hr>
+
+<h3>🛠 Bill of Materials</h3>
+
+<table>
+  <tr><th>Item</th><th>Description</th><th>Count</th><th>Price + Amazon Link (Non-Affiliate)</th></tr>
+  <tr><td><strong>SG90 Micro Servo</strong></td><td>standard 9g hobby servo</td><td>2</td><td>$6.99</td></tr>
+  <tr><td><strong>M2 screws</strong></td><td>per original gimbal</td><td>Misc</td><td>$9.99</td></tr>
+  <tr><td><strong>Raspberry Pi Zero 2 W</strong></td><td>any Pi with a camera port (Pi 5 needs a different GPIO library)</td><td>1</td><td>$40.99</td></tr>
+  <tr><td><strong>Raspberry Pi Camera Module 3</strong></td><td>+ 22→15 pin Pi Zero ribbon if not included</td><td>1</td><td>$29.99</td></tr>
+  <tr><td><strong>PCA9685 Servo Driver</strong></td><td>16-channel I²C board that drives the servos</td><td>1</td><td>~$10</td></tr>
+  <tr><td><strong>Laser Module (KY-008)</strong></td><td>standard 5V, 650nm (red), ≤5mW</td><td>1</td><td>$6.99</td></tr>
+  <tr><td><strong>Jumper Wires</strong></td><td>female–female, connect driver and laser</td><td>Misc</td><td>$6.98</td></tr>
+  <tr><td><strong>Printed Turret</strong></td><td>the body for the tracker</td><td>1</td><td>PLA is cheap</td></tr>
+  <tr><td><strong>Overall</strong></td><td>If you start with nothing</td><td></td><td><strong>~$112*</strong></td></tr>
+</table>
+
+<blockquote><p>*Many of these items are very useful for any future projects - especially the M2 Screws, Raspberry Pi and Jumper Wires. You'll also need a Mac to run the detection.</p></blockquote>
+
+<hr>
+
+<h3>🖨 Print Settings</h3>
+
+<p>Print using normal PLA settings. <strong>What I used:</strong></p>
+<ul>
+  <li><strong>Material:</strong> PLA</li>
+  <li><strong>Layer height:</strong> 0.2 mm</li>
+  <li><strong>Walls / perimeters:</strong> 3–4</li>
+  <li><strong>Infill:</strong> 15–20%</li>
+  <li><strong>Supports:</strong> Yes</li>
+</ul>
+
+<hr>
+
+<h3>📦 What to Print</h3>
+
+<p><strong>New parts in this remix:</strong></p>
+<ul>
+  <li><strong>Camera and Laser Mount Holder</strong> — the new gimbal top part; replaces the original FPV camera mount and holds the payload mount</li>
+  <li><strong>Camera and Laser Mount</strong> — holds the Pi Camera Module 3 and the 5 mm laser side by side</li>
+</ul>
+
+<p><strong>From the original gimbal</strong> (included here as STL, print whichever base you want):</p>
+<ul>
+  <li>Base low profile (or Steve's tower base) and Cross low profile</li>
+  <li>Inner bearing, Pan gear, Spur gear (48 teeth), Camera gear, Top part 2</li>
+</ul>
+
+<blockquote><p>📁 <strong>File formats:</strong> New parts are provided as both STL and STEP, so you can remix the payload for your own camera or laser. The original gimbal parts are STL only, matching how Steve published them.</p></blockquote>
+
+<hr>
+
+<h3>🪛 Assembly</h3>
+
+<ol>
+  <li><strong>Build the base.</strong> Follow Steve Eckerlein's photo tutorial on the original model page — install the servos, center them at 90°, and assemble the pan/tilt mechanism. Nothing changes here.</li>
+  <li><strong>Attach the Camera and Laser Mount Holder</strong> to the tilt servo in place of the original camera mount.</li>
+  <li><strong>Mount the camera and laser</strong> into the Camera and Laser Mount. The camera goes in upside down — the code flips the image.</li>
+  <li><strong>Wire up the electronics</strong> and load the code — see below.</li>
+</ol>
+
+<blockquote><p>The wiring diagram is in the photos above and in the GitHub repo.</p></blockquote>
+
+<hr>
+
+<h3>🔌 Wiring</h3>
+
+<ul>
+  <li><strong>Pi → PCA9685:</strong> Pin 1 (3.3V) → VCC · Pin 2 (5V) → V+ · Pin 3 (SDA) → SDA · Pin 5 (SCL) → SCL · Pin 6 (GND) → GND</li>
+  <li><strong>PCA9685 → servos:</strong> CH 0 = pan, CH 1 = tilt</li>
+  <li><strong>Pi → laser:</strong> Pin 11 (GPIO17) → S · Pin 9 (GND) → −</li>
+  <li><strong>Camera:</strong> ribbon cable into the Pi Zero's camera port</li>
+</ul>
+
+<hr>
+
+<h3>💻 Electronics &amp; Code</h3>
+
+<p>The detection and control code, wiring diagram, and setup instructions live on GitHub:</p>
+
+<p>➡ <a href="https://github.com/olivergollapudi/laser-turret"><strong>https://github.com/olivergollapudi/laser-turret</strong></a></p>
+
+<p>In short: the camera feed runs through a person-detection model, the model picks a target, and pan / tilt / laser commands are sent to the turret over TCP. Full setup steps are in the repo's README.</p>
+
+<blockquote><p>🎛 <strong>Tuning:</strong> if it aims a little to the side, adjust the offset in <code>detector.py</code>; if it wobbles, lower <code>PAN_GAIN</code> / <code>TILT_GAIN</code> in <code>main.py</code>.</p></blockquote>
+
+<hr>
+
+<h3>⚠️ Laser Safety</h3>
+
+<p>Use a <strong>low-power (≤5 mW) laser</strong> and <strong>never look into the beam</strong>. The turret aims at the middle of a person's body, but a bad detection can put the beam near someone's face. Only run it around people who know it's on, and never point it at aircraft, vehicles or animals.</p>
+
+<hr>
+
+<p>If you see <strong>ANY</strong> improvements or adjustments to the code <strong>PLEASE</strong> fork the repo and open a pull request — I'd love to see what you build!</p>
+</body>
+</html>

@@ -4,6 +4,7 @@ import json
 import numpy as np
 import cv2
 from detector import PersonDetector
+from hud import Hud
 
 # --- Config ---
 HOST = "0.0.0.0"
@@ -17,13 +18,15 @@ TILT_MIN, TILT_MAX = 60, 120
 PAN_CENTER = 90
 TILT_CENTER = 60
 
-PAN_GAIN = 0.02
-TILT_GAIN = 0.02
+PAN_GAIN = 0.065
+TILT_GAIN = 0.065
 MANUAL_STEP = 2  # degrees per keypress
 DEADZONE = 40  # pixels — ignore small errors to prevent oscillation
-SMOOTH = 0.15  # EMA factor — lower = smoother but slower to react
+SMOOTH = 0.4  # EMA factor — lower = smoother but slower to react
 
 detector = PersonDetector()
+hud = Hud(DEADZONE, (PAN_MIN, PAN_MAX), (TILT_MIN, TILT_MAX))
+WINDOW = "SENTRY-01 // Laser Turret"
 
 pan_angle = PAN_CENTER
 tilt_angle = TILT_CENTER
@@ -71,15 +74,19 @@ try:
             print("Connection lost")
             break
 
+        # Pi camera sends RGB; OpenCV expects BGR, so swap red/blue
+        frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+
         boxes = detector.detect(frame)
-        frame = detector.draw_boxes(frame, boxes)
 
         laser = False
+        aim = None
+        locked = False
 
         if not manual_mode and boxes:
             box = boxes[0]
             cx, cy = detector.get_centroid(box)
-            cv2.circle(frame, (cx, cy), 5, (0, 0, 255), -1)
+            aim = (cx, cy)
 
             error_x = cx - FRAME_W // 2
             error_y = cy - FRAME_H // 2
@@ -98,18 +105,19 @@ try:
 
             pan_angle = clamp(pan_angle, PAN_MIN, PAN_MAX)
             tilt_angle = clamp(tilt_angle, TILT_MIN, TILT_MAX)
+            locked = abs(error_x) <= DEADZONE and abs(error_y) <= DEADZONE
             laser = True
-
-        # HUD
-        mode_text = "MANUAL" if manual_mode else "AUTO"
-        cv2.putText(frame, f"Mode: {mode_text} | Pan: {round(pan_angle)} Tilt: {round(tilt_angle)}",
-                    (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
-        cv2.putText(frame, "Arrows: move | M: toggle mode | Q: quit",
-                    (10, FRAME_H - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200, 200, 200), 1)
 
         send_command(conn, round(pan_angle), round(tilt_angle), laser)
 
-        cv2.imshow("Turret - Mac Side", frame)
+        display = hud.render(frame, boxes, aim, {
+            "mode": "MANUAL" if manual_mode else "AUTO",
+            "pan": pan_angle,
+            "tilt": tilt_angle,
+            "laser": laser,
+            "locked": locked,
+        })
+        cv2.imshow(WINDOW, display)
 
         key = cv2.waitKey(1) & 0xFF
         if key == ord('q'):
@@ -117,13 +125,13 @@ try:
         elif key == ord('m'):
             manual_mode = not manual_mode
             print(f"Mode: {'MANUAL' if manual_mode else 'AUTO'}")
-        elif key == 82:  # Up arrow - tilt up
+        elif key in (82, 0):  # Up arrow - tilt up
             tilt_angle = clamp(tilt_angle - MANUAL_STEP, TILT_MIN, TILT_MAX)
-        elif key == 84:  # Down arrow - tilt down
+        elif key in (84, 1):  # Down arrow - tilt down
             tilt_angle = clamp(tilt_angle + MANUAL_STEP, TILT_MIN, TILT_MAX)
-        elif key == 81:  # Left arrow - pan left
+        elif key in (81, 2):  # Left arrow - pan left
             pan_angle = clamp(pan_angle - MANUAL_STEP, PAN_MIN, PAN_MAX)
-        elif key == 83:  # Right arrow - pan right
+        elif key in (83, 3):  # Right arrow - pan right
             pan_angle = clamp(pan_angle + MANUAL_STEP, PAN_MIN, PAN_MAX)
 
 except KeyboardInterrupt:

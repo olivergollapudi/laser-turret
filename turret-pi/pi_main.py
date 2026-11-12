@@ -1,16 +1,19 @@
+import os
 import socket
 import struct
 import time
 import json
 import board
 import busio
+import cv2
 from picamera2 import Picamera2
 from adafruit_servokit import ServoKit
 from adafruit_pca9685 import PCA9685
 import RPi.GPIO as GPIO
 
 # --- Config ---
-MAC_IP = "100.82.91.9"
+# Mac's IP (local Wi-Fi or Tailscale). Override without editing: TURRET_MAC_IP=100.x.x.x python3 pi_main.py
+MAC_IP = os.environ.get("TURRET_MAC_IP", "192.168.1.52")
 PORT = 9999
 LASER_PIN = 17
 
@@ -67,7 +70,6 @@ try:
         frame = camera.capture_array()
 
         # Encode as JPEG
-        import cv2
         frame = cv2.rotate(frame, cv2.ROTATE_180)
         _, jpeg = cv2.imencode(".jpg", frame, [cv2.IMWRITE_JPEG_QUALITY, 70])
         frame_bytes = jpeg.tobytes()

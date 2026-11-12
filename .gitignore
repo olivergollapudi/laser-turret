@@ -216,3 +216,10 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Project
+# YOLO weights (ultralytics downloads yolo11n.pt on first run)
+*.pt
+# Demo video is large: upload it to GitHub/YouTube instead of committing
+media/*.mp4
+.DS_Store

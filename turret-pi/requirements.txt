@@ -1,0 +1,4 @@
+# picamera2 and opencv come from apt (see README)
+adafruit-circuitpython-servokit
+adafruit-circuitpython-pca9685
+RPi.GPIO
