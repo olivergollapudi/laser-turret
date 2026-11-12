@@ -5,7 +5,7 @@ A Raspberry Pi Zero 2W streams its camera to a Mac. The Mac runs person detectio
 
 ![The turret turning to follow a person walking around the room, with the live feed on the Mac](media/demo.gif)
 
-**3D-printed parts:** [Printables — *link coming soon*](#)  ·  **Full demo video:** [*link coming soon*](#)
+**3D-printed parts:** [Printables](https://www.printables.com/model/1731488-person-tracking-laser-turret-raspberry-pi-python)
 
 | What the turret sees | Laser on target |
 |---|---|
@@ -196,4 +196,4 @@ Other notes:
 
 ## License
 
-Code: MIT, see [LICENSE](LICENSE). 3D models: see the license on the Printables page. The gimbal parts belong to Steve Eckerlein and keep his license.
+Code: MIT, see [LICENSE](LICENSE). 3D models: CC BY-NC-SA 4.0, see the [Printables page](https://www.printables.com/model/1731488-person-tracking-laser-turret-raspberry-pi-python). The gimbal parts are Steve Eckerlein's design under CC BY-NC.

@@ -11,7 +11,7 @@
 | KY-008 laser module | 5V, 650 nm red, ≤5 mW | 1 | $6.99 |
 | Female–female jumper wires | Pi ↔ PCA9685 and laser | ~8 | $6.98 (pack) |
 | microSD card, 16 GB+ | Raspberry Pi OS Bookworm | 1 | — |
-| Printed parts | See [`stl/`](stl/) and the Printables page | 1 set | PLA |
+| Printed parts | See [`stl/`](stl/) and the [Printables page](https://www.printables.com/model/1731488-person-tracking-laser-turret-raspberry-pi-python) | 1 set | PLA |
 
 **Total from scratch:** about $112 (plus ~$6 if you need the ribbon cable).
 

@@ -1,6 +1,6 @@
 # Printable parts
 
-The turret is a remix of **Cheap FPV Gimbal – Pan/Tilt by Steve Eckerlein** on Printables. The base, servo mounts and gears are his design, unchanged. Download those from his model page (or from this project's Printables page) and follow his assembly guide.
+The turret is a remix of **Cheap FPV Gimbal – Pan/Tilt by Steve Eckerlein** on Printables. The base, servo mounts and gears are his design, unchanged. Download those from his model page (or from [this project's Printables page](https://www.printables.com/model/1731488-person-tracking-laser-turret-raspberry-pi-python)) and follow his assembly guide.
 
 ## New parts in this remix
 
