@@ -9,7 +9,7 @@ A Raspberry Pi Zero 2W streams its camera to a Mac. The Mac runs person detectio
 
 | What the turret sees | Laser on target |
 |---|---|
-| ![Live HUD: a person walks into frame and the turret locks on](media/hud-view.gif) | ![Laser dot landing next to the aim point](media/laser-hit.jpg) |
+| ![Live HUD: the turret keeps a person boxed and centered as they walk left and right](media/hud-view.gif) | ![Laser dot landing next to the aim point](media/laser-hit.jpg) |
 
 > [!WARNING]
 > **Laser safety.** Use a low-power (≤5 mW, Class 2/3R) module like the KY-008, and never look into the beam. The turret aims at the middle of the detected body, but a bad detection, a crouching person or a pet can put the beam near someone's eyes. Only run it around people who know it's on, and never point it at aircraft, vehicles or animals.

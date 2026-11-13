@@ -12,7 +12,7 @@ Everything below is already in place except the STL files.
 | `hardware/BOM.md`, `hardware/wiring.md`, `hardware/wiring.png/.svg` | ✅ | Parts list with prices, pin-by-pin wiring, and the diagram. |
 | `hardware/stl/*.stl`, `*.step` | ✅ | **You add these:** your 2 new parts only (names in `hardware/stl/README.md`). Steve's gimbal parts stay on Printables. |
 | `media/demo.gif` | ✅ | 21-second room view (from `IMG_8612.MOV`, first 5 s cut): the turret turning to follow you. Top of the README. |
-| `media/hud-view.gif` | ✅ | 7-second turret's-eye view: empty room, you walk in, it locks on. In the README next to the laser photo. |
+| `media/hud-view.gif` | ✅ | 8-second turret's-eye view: you're locked on from the first frame and it follows you left and right. In the README next to the laser photo. |
 | `media/laser-hit.jpg` | ✅ | In the README. |
 | `media/setup.jpg`, `media/tracking.jpg`, `media/turret-desk.jpg` | ✅ | Spares for Printables (`setup.jpg` is the cover image). |
 | `media/demo.mp4` | ❌ (ignored) | 68-second highlight cut, 11 MB. Upload it instead (see below). |
